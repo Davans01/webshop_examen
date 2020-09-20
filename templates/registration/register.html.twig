@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello IndexController!{% endblock %}
+{% block title %}Register{% endblock %}
 
 {% block body %}
        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
@@ -28,5 +28,19 @@
       <a class="btn my-2 my-sm-0"  href="/register">Register</a>
   </div>
 </nav>
-<img src="https://dummyimage.com/hd1080" class="img-fluid" alt="Responsive image">
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <h1>Register</h1>
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+        {{ form_row(registrationForm.agreeTerms) }}
+
+        <button type="submit" class="btn">Register</button>
+    {{ form_end(registrationForm) }}
 {% endblock %}
